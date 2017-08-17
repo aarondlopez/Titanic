@@ -7,16 +7,29 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+# Load data and libraries
 
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(randomForest)
 
 train <- read.csv("train.csv")
 test <- read.csv("test.csv")
 
 full <- bind_rows(train, test)
+
+# Data Wrangling
+
 str(full)
+summary(full)
+# Age has alot of missing values, so I'll look at replacing those first
+hist(full$Age)
+summary(full$Age)
+# We'll replace the NA's with the mean age of 29.88
+full$Age[is.na(full$Age)] <- 29.88
+
+# Exploratory Analysis
 
 ```
 
