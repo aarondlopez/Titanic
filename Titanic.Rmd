@@ -15,7 +15,8 @@ library(ggplot2)
 train <- read.csv("train.csv")
 test <- read.csv("test.csv")
 
-
+full <- bind_rows(train, test)
+str(full)
 
 ```
 
