@@ -31,5 +31,9 @@ full$Age[is.na(full$Age)] <- 29.88
 
 # Exploratory Analysis
 
+hist(full$Age)
+hist(full$Fare)
+ggplot(full, aes(Embarked, Fare, fill=Embarked)) + geom_boxplot()
+
 ```
 
