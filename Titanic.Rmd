@@ -28,12 +28,27 @@ hist(full$Age)
 summary(full$Age)
 # We'll replace the NA's with the mean age of 29.88
 full$Age[is.na(full$Age)] <- 29.88
+# Remove two missing embarked data points 62 and 830
+full <- full[-c(62, 830), ]
 
 # Exploratory Analysis
 
 hist(full$Age)
 hist(full$Fare)
 ggplot(full, aes(Embarked, Fare, fill=Embarked)) + geom_boxplot()
-# fix missing embarked data
+# Does where passangeres embarked have an impact on surviving?
+table(full$Survived, full$Embarked)
+# Most people embarked from S and they also had the most casualties
+# Females survived at a m uch higher rate than males
+table(full$Survived, full$Sex)
+# What about class? 3rd class passangers were least likely to survive
+table(full$Survived, full$Pclass)
+
+
+
+
+
+
+
 ```
 
