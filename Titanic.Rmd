@@ -14,8 +14,8 @@ library(ggplot2)
 library(ggthemes)
 library(randomForest)
 
-train <- read.csv("train.csv")
-test <- read.csv("test.csv")
+train <- read.csv("train.csv", stringsAsFactors = F)
+test <- read.csv("test.csv", stringsAsFactors = F)
 
 full <- bind_rows(train, test)
 
@@ -43,9 +43,17 @@ table(full$Survived, full$Sex)
 # What about class? 3rd class passangers were least likely to survive
 table(full$Survived, full$Pclass)
 
+# Build our model
 
+# split the clean data back into our train and test data sets
+full$Embarked <- as.factor(full$Embarked)
+full$Sex <- as.factor(full$Sex)
+train <- full[1:889,]
+test <- full[890:1307,]
 
+set.seed(123)
 
+model1 <- randomForest(factor(Survived) ~ Pclass + Sex + Age + SibSp + Fare + Embarked, data=train)
 
 
 
