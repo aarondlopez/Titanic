@@ -13,6 +13,8 @@ library(tidyr)
 library(ggplot2)
 library(ggthemes)
 library(randomForest)
+library(rpart)
+library(rpart.plot)
 
 train <- read.csv("train.csv", stringsAsFactors = F)
 test <- read.csv("test.csv", stringsAsFactors = F)
@@ -45,26 +47,44 @@ table(full$Survived, full$Pclass)
 
 # Build our model
 
-# split the clean data back into our train and test data sets
+# Split the clean data back into our train and test data sets
 full$Embarked <- as.factor(full$Embarked)
 full$Sex <- as.factor(full$Sex)
 train <- full[1:889,]
 test <- full[890:1307,]
 
-# Create Random Forest Model
+# Create random forest model
+
 set.seed(123)
 
 model1 <- randomForest(factor(Survived) ~ Pclass + Sex + Age + SibSp + Fare + Embarked, data=train)
+
 # Model error
-plot(model1, ylim=c(0,0.36)) + legend("topright", colnames(model1$err.rate), col=1:3, fill=1:3)
+plot(model1, ylim=c(0,0.36)) + legend('topright', colnames(model1$err.rate), col=1:3, fill=1:3)
 importance(model1)
 
-# Test our model
+# Create regression tree model
 
-prediction <- predict(model1, test)
-plot(prediction)
-solution <- data.frame(PassengerID = test$PassengerId, Survived = prediction, row.names = T)
-View(solution)
+model2 <- rpart(factor(Survived) ~ Pclass + Sex + Age + SibSp + Fare + Embarked, data=train)
+
+# Test and compare models
+
+# Random Forest
+prediction1 <- predict(model1, test)
+plot(prediction1)
+solution1 <- data.frame(PassengerID = test$PassengerId, Survived = prediction1, row.names = T)
+View(solution1)
+summary(model1)
+
+# Regression Tree
+prediction2 <- (predict(model2, test))
+plot(prediction2)
+solution2 <- data.frame(PassangerID = test$PassengerId, Survived = prediction1, row.names = T)
+View(solution2)
+summary(model2)
+
+
+
 
 
 ```
