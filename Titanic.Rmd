@@ -13,7 +13,6 @@ library(tidyr)
 library(ggplot2)
 library(ggthemes)
 library(randomForest)
-library(ggtree)
 
 train <- read.csv("train.csv", stringsAsFactors = F)
 test <- read.csv("test.csv", stringsAsFactors = F)
@@ -57,7 +56,7 @@ set.seed(123)
 
 model1 <- randomForest(factor(Survived) ~ Pclass + Sex + Age + SibSp + Fare + Embarked, data=train)
 # Model error
-plot(model1, ylim=c(0,0.36)) + legend('topright', colnames(model1$err.rate), col=1:3, fill=1:3)
+plot(model1, ylim=c(0,0.36)) + legend("topright", colnames(model1$err.rate), col=1:3, fill=1:3)
 importance(model1)
 
 # Test our model
@@ -67,5 +66,7 @@ plot(prediction)
 solution <- data.frame(PassengerID = test$PassengerId, Survived = prediction, row.names = T)
 View(solution)
 
-str```
+
+
+```
 
