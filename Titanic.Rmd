@@ -67,6 +67,5 @@ solution <- data.frame(PassengerID = test$PassengerId, Survived = prediction, ro
 View(solution)
 
 
-
 ```
 
