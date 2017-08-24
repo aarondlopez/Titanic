@@ -39,8 +39,10 @@ full$Fare[is.na(full$Fare)] <- 33.22
 
 # Exploratory Analysis
 
-ggplot(full, aes(Pclass, Fare, group=Pclass, fill=Pclass)) + geom_boxplot()
-ggplot(full, aes(Embarked, Fare, fill=Embarked)) + geom_boxplot()
+# The higher the class the higher the averaage fare paid, but some passengers got better deals than others.
+ggplot(full, aes(Pclass, Fare, group=Pclass, fill=Pclass)) + geom_boxplot() + theme_gdocs()
+# How does where a passenger embarked from effect the fare they paid? 
+ggplot(full, aes(Embarked, Fare, fill=Embarked)) + geom_boxplot() + theme_gdocs()
 # Does where passangeres embarked have an impact on surviving?
 table(full$Survived, full$Embarked)
 # Most people embarked from S and they also had the most casualties
