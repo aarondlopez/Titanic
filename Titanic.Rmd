@@ -27,7 +27,6 @@ full <- bind_rows(train, test)
 str(full)
 summary(full)
 # Age has alot of missing values, so I'll look at replacing those first
-ggplot(full, aes(Age, fill=Age)) + geom_histogram(binwidth = 5)
 summary(full$Age)
 # We'll replace the NA's with the mean age of 29.88
 full$Age[is.na(full$Age)] <- 29.88
@@ -39,6 +38,8 @@ full$Fare[is.na(full$Fare)] <- 33.22
 
 # Exploratory Analysis
 
+# There is a wide range of ages and since the data was missing many ages the median age is amplified.
+ggplot(full, aes(Age, fill=Age)) + geom_histogram(binwidth = 5)
 # The higher the class the higher the averaage fare paid, but some passengers got better deals than others.
 ggplot(full, aes(Pclass, Fare, group=Pclass, fill=Pclass)) + geom_boxplot() + theme_gdocs()
 # How does where a passenger embarked from effect the fare they paid? 
