@@ -5,7 +5,10 @@ date: "8/12/2017"
 output: html_document
 ---
 
-```{r, echo=F}
+Load Data and Libraries
+
+```{r, message=F}
+
 # Load data and libraries
 
 library(dplyr)
@@ -22,6 +25,12 @@ test <- read.csv("test.csv", stringsAsFactors = F)
 
 full <- bind_rows(train, test)
 
+```
+
+Data Clean Up
+
+```{r, message=F, results="hide"}
+
 # Data Wrangling
 
 str(full)
@@ -35,6 +44,12 @@ full <- full[-c(62, 830), ]
 # Replace missing fare values
 summary(full$Fare)
 full$Fare[is.na(full$Fare)] <- 33.22
+
+```
+
+Explore the Data
+
+```{r, message=F}
 
 # Exploratory Analysis
 
@@ -51,6 +66,12 @@ table(full$Survived, full$Embarked)
 table(full$Survived, full$Sex)
 # What about class? 3rd class passangers were least likely to survive
 table(full$Survived, full$Pclass)
+
+```
+
+Build Model(s)
+
+```{r, message=F}
 
 # Build our model
 
@@ -93,7 +114,6 @@ summary(rf_solution)
 
 write.csv(rf_solution, file = 'rf_solution.csv', row.names=F, quote = F)
 write.csv(rt_solution, file = 'rt_solution.csv', row.names=F, quote = F)
-
 
 ```
 
