@@ -33,3 +33,6 @@ vignettes/*.pdf
 *.knit.md
 .Rproj.user
 *.html
+
+# Python notebook checkpoints
+# .ipynb_checkpoints
